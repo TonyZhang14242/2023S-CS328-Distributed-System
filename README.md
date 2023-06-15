@@ -12,7 +12,7 @@ This repository contains 4 assignments in SUSTech CS328 course of 2023 spring se
 
 **Assignment 1:** Parallel Matrix Multiplication
 
-**Assignment 2: **Implementing Your Own RPC/RMI Framework
+**Assignment 2:** Implementing Your Own RPC/RMI Framework
 
 **Assignment 3**: Using Spark to Process Data
 
