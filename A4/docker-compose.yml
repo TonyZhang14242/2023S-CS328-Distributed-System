@@ -1,0 +1,20 @@
+services:
+  Registry:
+    image: tonyzhang14242/assignment4:registry
+
+  Server:
+    image: tonyzhang14242/assignment4:server
+    depends_on:
+        Registry:
+            condition: service_started
+
+  Client:
+    image: tonyzhang14242/assignment4:client
+    depends_on:
+        Server:
+            condition: service_started
+
+
+
+
+
