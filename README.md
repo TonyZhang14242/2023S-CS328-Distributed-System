@@ -18,3 +18,11 @@ This repository contains 4 assignments in SUSTech CS328 course of 2023 spring se
 **Assignment 3**: Using Spark to Process Data，graded 100 pts.
 
 **Assignment 4**: Dockerfile and Docker Compose，graded 90 pts.
+
+
+
+#### Final Exam:
+
+Final exam is IMPORTANT (cover 50% of your final score)!!!
+
+You may refer to [./final_review.pdf](final review material) for better preparation.
