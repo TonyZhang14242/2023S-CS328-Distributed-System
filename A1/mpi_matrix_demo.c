@@ -1,6 +1,7 @@
 #include <mpi.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #define MAT_SIZE 500
 
@@ -50,12 +51,13 @@ int main(int argc, char *argv[])
       /* master */
 
       /* First, fill some numbers into the matrix */
+      srand(time(NULL));  
       for (int i = 0; i < MAT_SIZE; i++)
          for (int j = 0; j < MAT_SIZE; j++)
-            a[i*MAT_SIZE+j] = i + j;
+            a[i*MAT_SIZE+j] = rand() % 10;
       for (int i = 0; i < MAT_SIZE; i++)
          for (int j = 0; j < MAT_SIZE; j++)
-            b[i*MAT_SIZE+j] = i * j;
+            b[i*MAT_SIZE+j] = rand() % 10;
 
       /* Measure start time */
       double start = MPI_Wtime();
@@ -69,7 +71,7 @@ int main(int argc, char *argv[])
          for(int j=0;j<MAT_SIZE;j++){
          double tmp=0;
          for(int k=0;k<MAT_SIZE;k++)
-            tmp += (local_matrix[i*MAT_SIZE+k] * b[j*MAT_SIZE+k]);
+            tmp += (local_matrix[i*MAT_SIZE+k] * b[k*MAT_SIZE+j]);
          local_res[i*MAT_SIZE+j]=tmp;
          }
       //free(local_matrix);
@@ -82,7 +84,7 @@ int main(int argc, char *argv[])
          for(int j=0;j<MAT_SIZE;j++){
             double tmp=0;
             for(int k=0;k<MAT_SIZE;k++)
-               tmp += a[i*MAT_SIZE+k]* b[j*MAT_SIZE+k];
+               tmp += a[i*MAT_SIZE+k]* b[k*MAT_SIZE+j];
             c[i*MAT_SIZE+j]=tmp;
          }  
 
@@ -122,7 +124,14 @@ int main(int argc, char *argv[])
          }
          //printf("\n");
       }
-      printf("%d\n",flag);//1 means correct answer
+     if (flag){
+         printf("%s","The result is correct!\n");
+      }
+      else
+      {
+         printf("%s","The result is wrong!\n");
+      }
+      //printf("%d\n",flag);//1 means correct answer
 
       //free(a);
       //free(b);
@@ -139,7 +148,7 @@ int main(int argc, char *argv[])
          for(int j=0;j<MAT_SIZE;j++){
             double tmp=0;
             for(int k=0;k<MAT_SIZE;k++)
-               tmp +=local_matrix[i*MAT_SIZE+k]*b[j*MAT_SIZE+k];
+               tmp +=local_matrix[i*MAT_SIZE+k]*b[k*MAT_SIZE+j];
             local_res[i*MAT_SIZE+j]=tmp;
          }
       //free(local_matrix);
